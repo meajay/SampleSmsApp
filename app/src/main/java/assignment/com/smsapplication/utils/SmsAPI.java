@@ -22,7 +22,7 @@ public class SmsAPI {
         this.context = context;
     }
 
-    public Observable<SmsResponse> fetchAllInboxSms(Context context) {
+    public Observable<SmsResponse> fetchAllInboxSms() {
         ContentResolver cr = context.getContentResolver();
         Cursor c = cr.query(Telephony.Sms.Inbox.CONTENT_URI, null, null,
                 null, Telephony.Sms.Inbox.DEFAULT_SORT_ORDER);

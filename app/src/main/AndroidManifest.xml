@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="assignment.com.smsapplication">
 
-    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name=".SmsApp"
@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".sms.view.SmsActivity">
+        <activity
+            android:name=".sms.view.SmsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
