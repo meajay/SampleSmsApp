@@ -5,6 +5,7 @@ public class Sms {
     private String read;
     private String message;
     private String date;
+    private String hoursAgo ="";
 
     public String getSender() {
         return sender;
@@ -36,5 +37,13 @@ public class Sms {
 
     public void setRead(String read) {
         this.read = read;
+    }
+
+    public String getHoursAgo() {
+        return hoursAgo;
+    }
+
+    public void setHoursAgo(String hoursAgo) {
+        this.hoursAgo = hoursAgo;
     }
 }

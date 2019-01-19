@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/time_elapsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 hrs ago" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/sender_tag"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="4dp">
+
+                <TextView
+                    android:id="@+id/sender_initial"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="hola" />
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/sender_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/sender_tag"
+                android:singleLine="true"
+                android:text="xnsbncxsb" />
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/sender_detail"
+                android:layout_marginStart="22dp"
+                android:layout_marginBottom="-21dp"
+                android:layout_toEndOf="@id/sender_tag"
+                android:maxLines="3"
+                android:text="xnsbncxsb" />
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

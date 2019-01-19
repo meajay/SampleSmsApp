@@ -17,6 +17,9 @@ import io.reactivex.Observable;
 
 public class SmsAPI {
     private Context context;
+    private long currentTime = 0L;
+    private int count = -1;
+    private boolean countHoursAgo = true;
 
     public SmsAPI(Context context) {
         this.context = context;
@@ -28,6 +31,9 @@ public class SmsAPI {
                 null, Telephony.Sms.Inbox.DEFAULT_SORT_ORDER);
         int totalSMS = 0;
         List<Sms> smsList = new ArrayList<>();
+        currentTime = System.currentTimeMillis();
+        count = 0;
+        countHoursAgo = true;
         if (c != null) {
             totalSMS = c.getCount();
             if (c.moveToFirst()) {
@@ -37,6 +43,9 @@ public class SmsAPI {
                     sms.setSender(c.getString(c.getColumnIndexOrThrow(Telephony.Sms.Inbox.ADDRESS)));
                     sms.setMessage(c.getString(c.getColumnIndexOrThrow(Telephony.Sms.Inbox.BODY)));
                     sms.setRead(c.getString(c.getColumnIndexOrThrow(Telephony.Sms.Inbox.READ)));
+                    String hourAgo = getHoursAgo(c.getString(c.getColumnIndexOrThrow(Telephony.
+                            Sms.Inbox.DATE)));
+                    sms.setHoursAgo(hourAgo);
                     c.moveToNext();
                     smsList.add(sms);
                 }
@@ -46,6 +55,21 @@ public class SmsAPI {
             Toast.makeText(context, "No message to show!", Toast.LENGTH_SHORT).show();
         }
         return getSmsResponse(smsList);
+    }
+
+    private String getHoursAgo(String time) {
+        if(countHoursAgo) {
+            long diff = currentTime - Long.valueOf(time);
+            int hours = (int) diff / (60000 * 60);
+            if (hours < 13 && count != hours) {
+                count = hours;
+                return hours + "hours ago";
+            } else if (hours > 24 && count != hours) {
+                countHoursAgo = false;
+                return 1 + "day ago";
+            }
+        }
+        return "";
     }
 
     private Observable<SmsResponse> getSmsResponse(List<Sms> smsList) {
