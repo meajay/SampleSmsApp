@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmsApplication</string>
+    <string name="sms_required">Read Sms permissons is mandatory in order to fetch Inbox messages.</string>
+    <string name="must_read_permissions">Read sms permission denied.</string>
 </resources>

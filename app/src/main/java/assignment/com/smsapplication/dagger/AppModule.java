@@ -3,8 +3,11 @@ package assignment.com.smsapplication.dagger;
 import android.app.Application;
 import android.content.Context;
 
+import javax.inject.Scope;
+
 import assignment.com.smsapplication.dagger.qualifier.ApplicationContext;
 import assignment.com.smsapplication.dagger.scope.AppScope;
+import assignment.com.smsapplication.utils.AppPermissions;
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,4 +31,5 @@ public class AppModule {
     Context provideContext() {
         return application.getBaseContext();
     }
+
 }

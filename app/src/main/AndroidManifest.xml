@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="assignment.com.smsapplication">
 
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
     <application
         android:name=".SmsApp"
         android:allowBackup="true"
