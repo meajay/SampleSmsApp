@@ -4,6 +4,8 @@ import android.app.Application;
 
 import assignment.com.smsapplication.dagger.AppComponent;
 import assignment.com.smsapplication.dagger.AppModule;
+import assignment.com.smsapplication.dagger.DaggerAppComponent;
+import assignment.com.smsapplication.dagger.PresenterModule;
 
 public class SmsApp extends Application {
     public AppComponent appComponent;
@@ -23,7 +25,7 @@ public class SmsApp extends Application {
         if (appComponent == null) {
             appComponent = DaggerAppComponent
                     .builder().appModule(new AppModule(this))
-                    .mvpPresenterModule(new MvpPresenterModule())
+                    .presenterModule(new PresenterModule())
                     .build();
         }
         return appComponent;
