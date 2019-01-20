@@ -1,6 +1,7 @@
 package assignment.com.smsapplication.sms.view;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,6 +59,8 @@ class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.SmsViewHolder> {
         TextView senderDetail;
         @BindView(R.id.message)
         TextView message;
+        @BindView(R.id.unread_tag)
+        View unreadTag;
 
         public SmsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +68,21 @@ class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.SmsViewHolder> {
         }
 
         public void setViewData(Sms sms) {
-            senderInitial.setText(sms.getSender());
+            char c = sms.getSender().charAt(0);
+            if (c == '+') {
+                c = 'X';
+            }
+            if (sms.getRead().equals("1")) {
+                unreadTag.setVisibility(View.GONE);
+                senderDetail.setTypeface(null, Typeface.NORMAL);
+                message.setTypeface(null, Typeface.NORMAL);
+            } else {
+                unreadTag.setVisibility(View.VISIBLE);
+                senderDetail.setTypeface(null, Typeface.BOLD);
+                message.setTypeface(null, Typeface.BOLD);
+
+            }
+            senderInitial.setText(c + "");
             senderDetail.setText(sms.getSender());
             message.setText(sms.getMessage());
             if (sms.getHoursAgo().length() > 0) {
