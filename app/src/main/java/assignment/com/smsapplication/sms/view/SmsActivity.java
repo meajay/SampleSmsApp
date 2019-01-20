@@ -2,7 +2,6 @@ package assignment.com.smsapplication.sms.view;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +50,6 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
         smsPresenter.onAttach(this);
         appPermissions = new AppPermissions(this);
         checkAndRequestSMSPermission();
-        fetchInBoxMessages();
         setUpRecyclerView();
     }
 

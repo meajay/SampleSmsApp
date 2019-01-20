@@ -8,9 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
-
-import assignment.com.smsapplication.sms.model.Sms;
+import assignment.com.smsapplication.constants.AppConstants;
+import assignment.com.smsapplication.sms.view.SmsActivity;
+import assignment.com.smsapplication.utils.NotificationUtils;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -20,7 +20,6 @@ public class SmsReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         SmsMessage[] msgs;
-        String strMessage = "";
         String format = bundle.getString("format");
         Object[] pdus = (Object[]) bundle.get("pdus");
         if (pdus != null) {
@@ -33,11 +32,17 @@ public class SmsReceiver extends BroadcastReceiver {
                 } else {
                     msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                 }
-                Sms sms = new Sms();
-                strMessage += "SMS from " + msgs[i].getOriginatingAddress();
-                strMessage += " :" + msgs[i].getMessageBody() + "\n";
-                Log.d(TAG, "onReceive: " + strMessage);
+                String address = msgs[i].getOriginatingAddress();
+                String messsage = msgs[i].getMessageBody();
+                Log.d(TAG, "onReceive: " + messsage);
+
+                showNotificationMessage(context, address, messsage);
             }
         }
+    }
+
+    private void showNotificationMessage(Context context, String title, String message) {
+        NotificationUtils notificationUtils = new NotificationUtils(context);
+        notificationUtils.showNotificationMessages(title, message);
     }
 }
