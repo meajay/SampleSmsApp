@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import assignment.com.smsapplication.R;
 import assignment.com.smsapplication.SmsApp;
 import assignment.com.smsapplication.constants.AppConstants;
-import assignment.com.smsapplication.receiver.SmsReceiver;
 import assignment.com.smsapplication.sms.model.Sms;
 import assignment.com.smsapplication.sms.presenter.SmsPresenter;
 import assignment.com.smsapplication.utils.AppPermissions;
@@ -136,6 +135,5 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
         smsRecycler.setAdapter(smsAdapter);
         smsRecycler.showShimmerAdapter();
     }
-
 
 }
