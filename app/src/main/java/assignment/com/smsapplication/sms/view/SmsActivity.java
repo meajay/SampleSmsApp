@@ -1,6 +1,8 @@
 package assignment.com.smsapplication.sms.view;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import javax.inject.Inject;
 import assignment.com.smsapplication.R;
 import assignment.com.smsapplication.SmsApp;
 import assignment.com.smsapplication.constants.AppConstants;
+import assignment.com.smsapplication.receiver.SmsReceiver;
 import assignment.com.smsapplication.sms.model.Sms;
 import assignment.com.smsapplication.sms.presenter.SmsPresenter;
 import assignment.com.smsapplication.utils.AppPermissions;
@@ -48,13 +51,14 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
         smsPresenter.onAttach(this);
         appPermissions = new AppPermissions(this);
         checkAndRequestSMSPermission();
+        fetchInBoxMessages();
         setUpRecyclerView();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        smsPresenter.getAllInBoxMessages();
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        fetchInBoxMessages();
     }
 
     @Override
