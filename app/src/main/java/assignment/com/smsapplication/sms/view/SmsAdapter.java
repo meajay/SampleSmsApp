@@ -3,6 +3,7 @@ package assignment.com.smsapplication.sms.view;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,8 @@ class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.SmsViewHolder> {
         TextView message;
         @BindView(R.id.unread_tag)
         View unreadTag;
+        @BindView(R.id.sender_tag)
+        CardView senderTag;
 
         public SmsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,15 +75,13 @@ class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.SmsViewHolder> {
             if (c == '+') {
                 c = 'X';
             }
-            if (sms.getRead().equals("1")) {
-                unreadTag.setVisibility(View.GONE);
-                senderDetail.setTypeface(null, Typeface.NORMAL);
-                message.setTypeface(null, Typeface.NORMAL);
-            } else {
+            unreadTag.setVisibility(View.GONE);
+            senderDetail.setTypeface(null, Typeface.NORMAL);
+            message.setTypeface(null, Typeface.NORMAL);
+            if (!sms.getRead().equals("1")) {
                 unreadTag.setVisibility(View.VISIBLE);
                 senderDetail.setTypeface(null, Typeface.BOLD);
                 message.setTypeface(null, Typeface.BOLD);
-
             }
             senderInitial.setText(c + "");
             senderDetail.setText(sms.getSender());

@@ -41,15 +41,16 @@ public class NotificationUtils {
     }
 
 
-    public void showNotificationMessages(final String title, final String message) {
+    public void showNotificationMessages(final String title, final String message,final String time){
         final int icon = R.drawable.ic_textsms;
         Intent resultIntent = new Intent(context, SmsActivity.class);
         resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
         resultIntent.putExtra(AppConstants.ADDRESS, title);
         resultIntent.putExtra(AppConstants.MESSAGE, message);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-                resultIntent, 0);
+        resultIntent.putExtra(AppConstants.TIMESTAMP,time);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
         showSmallNotification(mBuilder, icon, title, message, pendingIntent);
         playNotificationSound();

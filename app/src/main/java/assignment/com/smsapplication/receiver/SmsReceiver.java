@@ -34,15 +34,16 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
                 String address = msgs[i].getOriginatingAddress();
                 String messsage = msgs[i].getMessageBody();
+                String time = ""+msgs[i].getTimestampMillis();
                 Log.d(TAG, "onReceive: " + messsage);
 
-                showNotificationMessage(context, address, messsage);
+                showNotificationMessage(context, address, messsage,time);
             }
         }
     }
 
-    private void showNotificationMessage(Context context, String title, String message) {
+    private void showNotificationMessage(Context context, String title, String message,String time) {
         NotificationUtils notificationUtils = new NotificationUtils(context);
-        notificationUtils.showNotificationMessages(title, message);
+        notificationUtils.showNotificationMessages(title, message,time);
     }
 }

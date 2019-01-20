@@ -2,6 +2,8 @@ package assignment.com.smsapplication.sms.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +34,7 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
         EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.sms_recycler)
-    RecyclerView smsRecycler;
+    ShimmerRecyclerView smsRecycler;
 
     @Inject
     SmsPresenter smsPresenter;
@@ -57,6 +59,7 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         fetchInBoxMessages();
+        smsRecycler.showShimmerAdapter();
     }
 
     @Override
@@ -91,11 +94,17 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
     public void onGetInboxMessagesResponse(int result, List<Sms> smsList, String message) {
         if (result == AppConstants.SUCCESS) {
             this.smsList.clear();
-            this.smsList.addAll(smsList);
-            smsAdapter.notifyDataSetChanged();
+            updateAdapter(smsList);
         } else {
             Toast.makeText(this, "Error : " + message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void updateAdapter(List<Sms> smsList) {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> smsRecycler.hideShimmerAdapter(), 2000);
+        this.smsList.addAll(smsList);
+        smsAdapter.notifyDataSetChanged();
     }
 
     private void checkAndRequestSMSPermission() {
@@ -125,6 +134,8 @@ public class SmsActivity extends AppCompatActivity implements SmsMvpView,
                 , false));
         smsAdapter = new SmsAdapter(this, smsList);
         smsRecycler.setAdapter(smsAdapter);
+        smsRecycler.showShimmerAdapter();
     }
+
 
 }

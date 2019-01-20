@@ -2,8 +2,12 @@ package assignment.com.smsapplication.sms.presenter;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import assignment.com.smsapplication.base.BasePresenter;
 import assignment.com.smsapplication.constants.AppConstants;
+import assignment.com.smsapplication.sms.model.Sms;
 import assignment.com.smsapplication.sms.view.SmsMvpView;
 import assignment.com.smsapplication.utils.SmsAPI;
 import io.reactivex.android.schedulers.AndroidSchedulers;

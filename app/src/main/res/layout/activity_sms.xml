@@ -6,10 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".sms.view.SmsActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:id="@+id/sms_recycler"
         android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:shimmer_demo_angle="-30"
+        app:shimmer_demo_layout="@layout/dummy_item_layout"
+        app:shimmer_demo_child_count="10"/>
 
 </android.support.constraint.ConstraintLayout>
